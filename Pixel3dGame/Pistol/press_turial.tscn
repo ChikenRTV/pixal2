@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://cblxhjvkda42o"]
+
+[ext_resource type="Texture2D" uid="uid://cjlljta7r8qny" path="res://Levels/ToreliPress.png" id="1_kg6rj"]
+[ext_resource type="Script" path="res://Pistol/press_turial.gd" id="1_yvfud"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_215g7"]
+atlas = ExtResource("1_kg6rj")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ptvj"]
+atlas = ExtResource("1_kg6rj")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gojlb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_215g7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ptvj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2c1c8"]
+
+[node name="PressTurial" type="Area3D"]
+transform = Transform3D(1.9, 0, 0, 0, 1, 0, 0, 0, 1.8, 0, 0, 0)
+script = ExtResource("1_yvfud")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_gojlb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.463, 0, 0, 0, 2.176, 0, 0, 0, 1.6632, 0, 0, 0)
+shape = SubResource("SphereShape3D_2c1c8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

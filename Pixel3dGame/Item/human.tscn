@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://bp0sovmfyp0e4"]
+
+[ext_resource type="Script" path="res://Item/new_script.gd" id="1_svt6l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4g8fp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ci5l4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ic18d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvjd2"]
+albedo_color = Color(0, 0.290196, 1, 1)
+emission_enabled = true
+emission_energy_multiplier = 9.27
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_di3rp"]
+direction = Vector3(0, 0, 1)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_umli8"]
+size = Vector3(0.125, 0.125, 0.125)
+
+[node name="Human" type="CharacterBody3D"]
+script = ExtResource("1_svt6l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.311899, 0, 0, 0, 0.821723, 0, 0, 0, 0.311899, -0.0831495, 0.734169, 0)
+material_override = SubResource("StandardMaterial3D_4g8fp")
+mesh = SubResource("BoxMesh_ci5l4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.311899, 0, 0, 0, 0.821723, 0, 0, 0, 0.311899, 0.263364, 0.734169, 0)
+material_override = SubResource("StandardMaterial3D_4g8fp")
+mesh = SubResource("BoxMesh_ci5l4")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.311899, 0, 0, 0, 0.821723, 0, 0, 0, 0.311899, 0.488398, 1.45298, 0)
+material_override = SubResource("StandardMaterial3D_4g8fp")
+mesh = SubResource("BoxMesh_ci5l4")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.311899, 0, 0, 0, 0.821723, 0, 0, 0, 0.311899, -0.34912, 1.45298, 0)
+material_override = SubResource("StandardMaterial3D_4g8fp")
+mesh = SubResource("BoxMesh_ci5l4")
+
+[node name="Torse" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.710939, 0, 0, 0, 0.866225, 0, 0, 0, 0.605263, 0.089334, 1.39792, 0)
+material_override = SubResource("StandardMaterial3D_4g8fp")
+mesh = SubResource("BoxMesh_ci5l4")
+
+[node name="Hrad" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.513387, 0, 0, 0, 0.625523, 0, 0, 0, 0.437075, 0.089334, 1.99395, 0)
+material_override = SubResource("StandardMaterial3D_4g8fp")
+mesh = SubResource("BoxMesh_ci5l4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0977848, 1.22432, 0)
+shape = SubResource("CapsuleShape3D_ic18d")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Area3D2" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(6.49252, 0, 0, 0, 2.18525, 0, 0, 0, 7.12748, 0.0977848, 1.22432, 0)
+shape = SubResource("CapsuleShape3D_ic18d")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 1.89, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_qvjd2")
+emitting = false
+amount = 36
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_di3rp")
+draw_pass_1 = SubResource("BoxMesh_umli8")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.193
+autostart = true

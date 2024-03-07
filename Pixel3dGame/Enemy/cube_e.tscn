@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7m2tmyrqphgo"]
+
+[ext_resource type="Script" path="res://Enemy/EnemyNavigator.gd" id="1_l3qcm"]
+[ext_resource type="ArrayMesh" uid="uid://bs6rdxn71fn87" path="res://Enemy/Enemy1.obj" id="2_p4q4x"]
+[ext_resource type="AudioStream" uid="uid://o6wsmyrt4plt" path="res://Bullet/CubeExposion.wav" id="3_3buwv"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_k1q1g"]
+points = PackedVector3Array(-1, 0, -1, 1, 0, -1, -1, 0, 1, -1, 1.69978, -1, 1, 0, 1, 1, 1.69978, -1, -1, 1.69978, 1, -0.600039, 2.39991, 0.399961, -0.400157, 2.39991, -0.500196, 1, 1.69978, 1, -0.200078, 2.39991, -0.500196, -0.200078, 2.5, -0.400157, -0.100039, 2.5, 0.499804, -0.400157, 2.5, 0.599843, -0.600039, 2.39991, 0.499804, -0.400157, 2.5, 0.499804, -0.300117, 2.5, -0.400157, -0.100039, 2.5, 0.599843)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qyk1e"]
+size = Vector3(1, 1, 1.05029)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6f3cw"]
+albedo_color = Color(0, 0.290196, 1, 1)
+emission_enabled = true
+emission_energy_multiplier = 9.27
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2ltl4"]
+direction = Vector3(0, 0, 1)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_k2pkl"]
+size = Vector3(0.125, 0.125, 0.125)
+
+[node name="CubeE" type="CharacterBody3D" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_l3qcm")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Enemy1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.23781e-08, 0, -0.511952, 0, 0.511952, 0, 0.511952, 0, -2.23781e-08, 0.0540045, 0.0321691, 0.0735976)
+mesh = ExtResource("2_p4q4x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-2.23781e-08, 0, 0.511952, 0, 0.429299, 0, -0.511952, 0, -2.23781e-08, 0.0540045, 0.0228569, 0.0735976)
+shape = SubResource("ConvexPolygonShape3D_k1q1g")
+
+[node name="Area3D2" type="Area3D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1.78671, 0, 0, 0, 1.24894, 0, 0, 0, 1.47726, 0.0536966, 0.662498, 0.0325164)
+shape = SubResource("BoxShape3D_qyk1e")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.142
+autostart = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 1.89, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6f3cw")
+emitting = false
+amount = 36
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2ltl4")
+draw_pass_1 = SubResource("BoxMesh_k2pkl")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_3buwv")
+max_distance = 12.8
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
+[connection signal="body_exited" from="Area3D2" to="." method="_on_area_3d_2_body_exited"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

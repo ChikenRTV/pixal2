@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cd6sr7oa8dhyj"
+path="res://.godot/imported/MoonStand.obj-8da5e2a065b28c7333f5a58913c62583.mesh"
+
+[deps]
+
+files=["res://.godot/imported/MoonStand.obj-8da5e2a065b28c7333f5a58913c62583.mesh"]
+
+source_file="res://Decal/MoonStand.obj"
+dest_files=["res://.godot/imported/MoonStand.obj-8da5e2a065b28c7333f5a58913c62583.mesh", "res://.godot/imported/MoonStand.obj-8da5e2a065b28c7333f5a58913c62583.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

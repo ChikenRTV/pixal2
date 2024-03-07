@@ -1,0 +1,162 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0etbgkylhpoa"]
+
+[ext_resource type="ArrayMesh" uid="uid://cd6sr7oa8dhyj" path="res://Decal/MoonStand.obj" id="1_lmfk1"]
+[ext_resource type="PackedScene" uid="uid://bqpm2tdrb07l2" path="res://player.tscn" id="2_gqpfm"]
+[ext_resource type="PackedScene" uid="uid://b7m2tmyrqphgo" path="res://Enemy/cube_e.tscn" id="3_higgi"]
+
+[sub_resource type="Environment" id="Environment_jp5ny"]
+background_mode = 2
+background_energy_multiplier = 0.52
+ambient_light_source = 3
+ambient_light_color = Color(0.796078, 0, 0, 1)
+ambient_light_energy = 1.95
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_y20xv"]
+vertices = PackedVector3Array(-54.0991, 1, -28.9231, -35.3491, 1, -28.9231, -35.3491, 1, -30.1731, -35.3491, 1, -30.1731, -33.8491, 1.25, -30.1731, -33.8491, 1, -49.1731, -35.3491, 1, -30.1731, -33.8491, 1, -49.1731, -54.0991, 1, -49.1731, -54.0991, 1, -28.9231, -35.0991, 1, -27.6731, -35.3491, 1, -28.9231, -54.0991, 1, -28.9231, -54.0991, 1, 49.0769, -33.8491, 1, -49.1731, -33.8491, 1.25, -30.1731, -32.5991, 1, -30.1731, 54.1509, 1, -49.1731, -32.8491, 1, -27.6731, -54.0991, 1, 49.0769, 54.1509, 1, 49.0769, 54.1509, 1, -49.1731, -32.8491, 1, -27.6731, -35.0991, 1, -27.6731, -54.0991, 1, 49.0769, 54.1509, 1, -49.1731, -32.5991, 1, -30.1731, -32.8491, 1, -27.6731)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(24, 23, 22), PackedInt32Array(25, 27, 26)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1urs"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yhofu"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2cyol"]
+points = PackedVector3Array(-1.1, 0, -1.2, -1.1, 0, 1.3, -1.1, 0.0999902, -1.2, 1.4, 0, -1.2, -1.1, 0.0999902, 1.3, 1.4, 0, 1.3, -1.00016, 0.19998, -0.500117, -0.700137, 0.399961, -0.800137, -0.500206, 0.5, -0.700049, 1.4, 0.0999902, -1.2, -0.700137, 0.399961, 0.999736, -0.600049, 0.5, 0.799804, -1.00016, 0.19998, -0.400029, 1.4, 0.0999902, 1.3, -0.600049, 0.5, 0.699961, 0.799961, 0.5, -0.700049, 0.999892, 0.399961, -0.800137, 0.899804, 0.5, -0.300186, 0.999892, 0.399961, 0.999736, 0.799961, 0.5, 0.799804, 0.899804, 0.5, -0.200098)
+
+[node name="World22" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jp5ny")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_gqpfm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.51778, 0.5, -6.44745)
+
+[node name="CubeE" parent="." instance=ExtResource("3_higgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.2659, 0.500004, -19.2097)
+
+[node name="CubeE2" parent="." instance=ExtResource("3_higgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67525, 0.499996, 29.6556)
+
+[node name="CubeE3" parent="." instance=ExtResource("3_higgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9532, 1.20013, -21.3128)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_y20xv")
+
+[node name="World2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(1.77514, 0, 0, 0, 1, 0, 0, 0, 1.94249, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(61.5153, 0, 0, 0, 1, 0, 0, 0, 51.1436, 0, 0, 0)
+mesh = SubResource("BoxMesh_v1urs")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(61.5153, 0, 0, 0, 1, 0, 0, 0, 51.1436, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_yhofu")
+
+[node name="Mosntand" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, 0, -0.0820074, -5.25791)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand2" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, -8.93027, -0.164015, -3.08969)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand3" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, -14.1803, -0.164015, 2.29673)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand4" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, -2.60707, -0.164015, 7.98727)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand7" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, -20.3857, -0.164015, 19.4138)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand8" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, 15.875, -0.164015, 16.3992)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand9" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, -19.1148, -0.0222387, -15.2284)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand5" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, 12.6335, -0.164015, 4.81722)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")
+
+[node name="Mosntand6" type="StaticBody3D" parent="NavigationRegion3D/World2"]
+transform = Transform3D(0.563336, 0, 0, 0, 1, 0, 0, 0, 0.514802, 12.6335, -0.164015, -9.68187)
+
+[node name="MoonStand" type="MeshInstance3D" parent="NavigationRegion3D/World2/Mosntand6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204161, 0.522239, 0.404743)
+mesh = ExtResource("1_lmfk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/World2/Mosntand6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0761466, 0.522239, 0.325055)
+shape = SubResource("ConvexPolygonShape3D_2cyol")

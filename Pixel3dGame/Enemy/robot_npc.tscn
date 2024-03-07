@@ -1,0 +1,201 @@
+[gd_scene load_steps=19 format=3 uid="uid://bw6r6on6ks744"]
+
+[ext_resource type="Script" path="res://Enemy/robot_npc.gd" id="1_6dnpe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kqr5"]
+albedo_color = Color(0.378926, 0.254848, 0.192371, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n8tpc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1267y"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dcwpb"]
+albedo_color = Color(0.545098, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c155s"]
+albedo_color = Color(0.380392, 0.254902, 0.192157, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eucxy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isxi7"]
+albedo_color = Color(0.160784, 0.184314, 0.0392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edb3x"]
+albedo_color = Color(0.378926, 0.254848, 0.192371, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qg7vg"]
+albedo_color = Color(0.113725, 0.160784, 0.301961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e6p5r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uycil"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icio1"]
+albedo_color = Color(0.113725, 0.160784, 0.301961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cmwj2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8im27"]
+albedo_color = Color(0.113725, 0.160784, 0.301961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ac3xx"]
+
+[sub_resource type="Animation" id="Animation_rvb66"]
+resource_name = "Stand"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("21")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.588, 0, 0, 0.809, 0.5, 1, 0, 0, 0, 1, 1, 1, -0.588, 0, 0, 0.809)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("22")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.368, 0, 0, -0.93, 0.5, 1, -0.78, 0, 0, 0.626, 1, 1, -0.368, 0, 0, -0.93)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("21")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.177, 0.5, 0.01, 1, 1, 0.177, 0.5, 0.01)
+tracks/3/type = "position_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("22")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, -0.177, 0.351, 0.01, 0.5, 1, -0.177, 0.5, 0.1, 1, 1, -0.177, 0.351, 0.01)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qvbtb"]
+_data = {
+"Stand": SubResource("Animation_rvb66")
+}
+
+[node name="RobotNPC" type="CharacterBody3D"]
+script = ExtResource("1_6dnpe")
+
+[node name="Head2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.062187)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head2"]
+transform = Transform3D(0.616507, 0, 0, 0, 0.616507, 0, 0, 0, 0.616507, 0, 1.86042, 0)
+material_override = SubResource("StandardMaterial3D_2kqr5")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_n8tpc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Head2"]
+transform = Transform3D(0.590631, 0, 0, 0, 0.256387, 0, 0, 0, 0.396321, 0, 1.86042, -0.119879)
+material_override = SubResource("StandardMaterial3D_1267y")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_n8tpc")
+
+[node name="Eye" type="MeshInstance3D" parent="Head2"]
+transform = Transform3D(0.11526, 0, 0, 0, 0.189029, 0, 0, 0, 0.202708, 0.184934, 1.86042, -0.233877)
+material_override = SubResource("StandardMaterial3D_dcwpb")
+mesh = SubResource("BoxMesh_n8tpc")
+
+[node name="Eye2" type="MeshInstance3D" parent="Head2"]
+transform = Transform3D(0.11526, 0, 0, 0, 0.189029, 0, 0, 0, 0.202708, -0.175339, 1.86042, -0.233877)
+material_override = SubResource("StandardMaterial3D_dcwpb")
+mesh = SubResource("BoxMesh_n8tpc")
+
+[node name="LegOther" type="Node3D" parent="."]
+transform = Transform3D(0.775582, 0, 0, 0, -3.39018e-08, 0.590432, 0, -0.775582, -2.58086e-08, 0.490563, 0.11395, 0.267496)
+
+[node name="Leg1" type="MeshInstance3D" parent="LegOther"]
+transform = Transform3D(0.305271, 0, 0, 0, 0.403517, 0, 0, 0, 1.03267, -0.0695712, 0.435778, 1.71295)
+material_override = SubResource("StandardMaterial3D_c155s")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_eucxy")
+
+[node name="Leg2" type="MeshInstance3D" parent="LegOther"]
+transform = Transform3D(0.393899, 0, 0, 0, 0.465072, 0, 0, 0, 0.432534, -0.0695712, 0.435778, 1.11989)
+material_override = SubResource("StandardMaterial3D_isxi7")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_eucxy")
+
+[node name="Leg3" type="MeshInstance3D" parent="LegOther"]
+transform = Transform3D(0.336256, 0, 0, 0, 0.444473, 0, 0, 0, 0.369238, -0.0695712, 0.435778, 0.874497)
+material_override = SubResource("StandardMaterial3D_edb3x")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_eucxy")
+
+[node name="LegOther2" type="Node3D" parent="."]
+transform = Transform3D(0.775582, 0, 0, 0, -3.39018e-08, 0.590432, 0, -0.775582, -2.58086e-08, -0.411619, 0.11395, 0.267496)
+
+[node name="Leg1" type="MeshInstance3D" parent="LegOther2"]
+transform = Transform3D(0.305271, 0, 0, 0, 0.39687, 0.240674, 0, -0.0958123, 0.996912, -0.081462, 0.346576, 1.81471)
+material_override = SubResource("StandardMaterial3D_c155s")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_eucxy")
+
+[node name="Leg2" type="MeshInstance3D" parent="LegOther2/Leg1"]
+transform = Transform3D(1.29033, 0, 0, 0, 1.15255, 0, 0, -1.77636e-15, 0.41885, 0, 5.96046e-08, -0.574298)
+material_override = SubResource("StandardMaterial3D_isxi7")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_eucxy")
+skeleton = NodePath("../..")
+
+[node name="Leg3" type="MeshInstance3D" parent="LegOther2/Leg1"]
+transform = Transform3D(1.1015, 0, 0, 0, 1.1015, 0, 0, -1.77636e-15, 0.357557, 0, 7.45058e-08, -0.811927)
+material_override = SubResource("StandardMaterial3D_edb3x")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_eucxy")
+skeleton = NodePath("../..")
+
+[node name="Torse" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torse"]
+transform = Transform3D(0.722626, 0, 0, 0, 1, 0, 0, 0, 0.706618, 0, 1.0927, 0)
+material_override = SubResource("StandardMaterial3D_qg7vg")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_e6p5r")
+
+[node name="Leg" type="Node3D" parent="Torse"]
+transform = Transform3D(0.756772, 0, 0, 0, 0.756772, 0, 0, 0, 0.756772, 0.032678, 0, 0)
+
+[node name="Leg2" type="Node3D" parent="Torse"]
+transform = Transform3D(0.756772, 0, 0, 0, 0.756772, 0, 0, 0, 0.756772, -0.314244, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.14537, 0, 0, 0, 1, 0, 0.541507, 0)
+shape = SubResource("BoxShape3D_uycil")
+
+[node name="21" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.258736, 0, 0, 0, 0.233591, 0.217983, 0, -0.719819, 0.0707385, 0.177, 0.5, 0.01)
+material_override = SubResource("StandardMaterial3D_icio1")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_cmwj2")
+skeleton = NodePath("../Torse/Leg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="21"]
+transform = Transform3D(1.13523, 0, 0, 0, 0.238792, 0, 0, 2.98023e-08, 1.63054, -0.0695203, -0.396439, -0.204807)
+material_override = SubResource("StandardMaterial3D_8im27")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_ac3xx")
+skeleton = NodePath("../../Torse/Leg")
+
+[node name="22" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.258736, 0, 0, 0, 0.551868, -0.156814, 0, 0.517828, 0.167123, -0.177, 0.351, 0.01)
+material_override = SubResource("StandardMaterial3D_icio1")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_cmwj2")
+skeleton = NodePath("../Torse/Leg2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="22"]
+transform = Transform3D(1.13523, 0, 0, 0, 0.238792, 1.49012e-08, 0, -2.98023e-08, 1.63054, -0.0695204, -0.396439, -0.204807)
+material_override = SubResource("StandardMaterial3D_8im27")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_ac3xx")
+skeleton = NodePath("../../Torse/Leg2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qvbtb")
+}

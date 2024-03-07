@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://bb7qrq75bdho7"]
+
+[ext_resource type="Script" path="res://TitleLogo.gd" id="1_jlohw"]
+[ext_resource type="Texture2D" uid="uid://bsxtcu1fgivx" path="res://Levels/logo_dark.png" id="2_xyqyi"]
+
+[sub_resource type="Animation" id="Animation_0i4k7"]
+resource_name = "Fade_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoDark:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2ji6e"]
+resource_name = "Fade_Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoDark:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qmpat"]
+_data = {
+"Fade_In": SubResource("Animation_0i4k7"),
+"Fade_Out": SubResource("Animation_2ji6e")
+}
+
+[node name="TitleLogo" type="Node2D"]
+script = ExtResource("1_jlohw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1338.0
+offset_bottom = 742.0
+color = Color(0, 0, 0, 1)
+
+[node name="LogoDark" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(627, 343)
+scale = Vector2(0.544235, 0.614641)
+texture = ExtResource("2_xyqyi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qmpat")
+}

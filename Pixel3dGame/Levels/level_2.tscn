@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwtdwwoj1137c"]
+
+[ext_resource type="Texture2D" uid="uid://bsfp0ydqhlkof" path="res://Levels/CityImage.png" id="1_ekewh"]
+[ext_resource type="PackedScene" uid="uid://bqpm2tdrb07l2" path="res://player.tscn" id="2_8fh7o"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lsquy"]
+panorama = ExtResource("1_ekewh")
+
+[sub_resource type="Sky" id="Sky_a7h42"]
+sky_material = SubResource("PanoramaSkyMaterial_lsquy")
+
+[sub_resource type="Environment" id="Environment_s78vf"]
+background_mode = 2
+sky = SubResource("Sky_a7h42")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_2i7n3"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_whsw7"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s78vf")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(2.3, 0, 0, 0, 1, 0, 0, 0, 9.7, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(7.344, 0, 0, 0, 1, 0, 0, 0, 7.83, 0, 0, 0)
+mesh = SubResource("BoxMesh_2i7n3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(7.344, 0, 0, 0, 1, 0, 0, 0, 7.83, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_whsw7")
+
+[node name="Player" parent="." instance=ExtResource("2_8fh7o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 31.5)

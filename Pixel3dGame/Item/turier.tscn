@@ -1,0 +1,142 @@
+[gd_scene load_steps=15 format=3 uid="uid://duv0vyokni2vp"]
+
+[ext_resource type="Script" path="res://Item/turier_system.gd" id="1_yalix"]
+[ext_resource type="Texture2D" uid="uid://bjr4j70mibefc" path="res://Item/S_Shoot.png" id="2_kvjy2"]
+[ext_resource type="AudioStream" uid="uid://shqlu5ep2qjf" path="res://PistolShoot.wav" id="3_awl8j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_np14c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2i77"]
+albedo_color = Color(0.32549, 0.639216, 0.843137, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_na6w1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5fopw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8hjm"]
+atlas = ExtResource("2_kvjy2")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0r5oh"]
+atlas = ExtResource("2_kvjy2")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcnbb"]
+atlas = ExtResource("2_kvjy2")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8c0k4"]
+atlas = ExtResource("2_kvjy2")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vl0ns"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8hjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0r5oh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcnbb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8c0k4")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_np86l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q474f"]
+
+[node name="Turier" type="StaticBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_yalix")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.188843, 0, 0, 0, 0.878492, 0.0557417, 0, -0.271401, 0.180429, -0.0329268, 0.209448, 0.230066)
+mesh = SubResource("BoxMesh_np14c")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.172763, -0.109592, 0.0728573, 0, 0.878492, 0.0557416, -0.0762551, -0.24829, 0.165065, 0.194101, 0.209448, 0.179869)
+mesh = SubResource("BoxMesh_np14c")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.188843, 4.09804e-08, -2.7244e-08, 0, 0.878492, 0.0557417, 2.85145e-08, 0.271401, -0.180429, 0.136861, 0.209448, -0.12496)
+mesh = SubResource("BoxMesh_np14c")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.172763, 0.109592, -0.0728574, 2.27258e-09, 0.878492, 0.0557416, 0.0762551, 0.24829, -0.165065, -0.0901664, 0.209448, -0.0747624)
+mesh = SubResource("BoxMesh_np14c")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.14807e-08, 0.491421, -4.29614e-08, 0.491421, -2.14807e-08, 0, -1.8779e-15, -4.29614e-08, -0.491421, -0.156079, 0.82835, 0.0435921)
+material_override = SubResource("StandardMaterial3D_k2i77")
+mesh = SubResource("CylinderMesh_na6w1")
+
+[node name="Pull" type="Node3D" parent="Head"]
+transform = Transform3D(-8.8949e-08, 2.03492, 0, -2.03492, -8.8949e-08, 0, 0, 0, 2.03492, -1.68562, -0.317608, -0.0887063)
+
+[node name="Head2" type="MeshInstance3D" parent="Head/Pull"]
+transform = Transform3D(-6.05518e-09, -0.241117, 0, 0.138526, -1.05396e-08, 0, 0, 0, 0.138526, -0.760857, 0.90554, -0.0439564)
+material_override = SubResource("StandardMaterial3D_5fopw")
+mesh = SubResource("CylinderMesh_na6w1")
+skeleton = NodePath("../../..")
+
+[node name="Head3" type="MeshInstance3D" parent="Head/Pull"]
+transform = Transform3D(-6.05518e-09, -0.241117, 0, 0.138526, -1.05396e-08, 0, 0, 0, 0.138526, -0.760857, 0.90554, 0.123594)
+material_override = SubResource("StandardMaterial3D_5fopw")
+mesh = SubResource("CylinderMesh_na6w1")
+skeleton = NodePath("../../..")
+
+[node name="Head4" type="MeshInstance3D" parent="Head/Pull"]
+transform = Transform3D(-6.05518e-09, -0.241117, 0, 0.138526, -1.05396e-08, 0, 0, 0, 0.138526, -0.760857, 0.73311, -0.0439564)
+material_override = SubResource("StandardMaterial3D_5fopw")
+mesh = SubResource("CylinderMesh_na6w1")
+skeleton = NodePath("../../..")
+
+[node name="Head5" type="MeshInstance3D" parent="Head/Pull"]
+transform = Transform3D(-6.05518e-09, -0.241117, 0, 0.138526, -1.05396e-08, 0, 0, 0, 0.138526, -0.760857, 0.73311, 0.123594)
+material_override = SubResource("StandardMaterial3D_5fopw")
+mesh = SubResource("CylinderMesh_na6w1")
+skeleton = NodePath("../../..")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Head/Pull"]
+transform = Transform3D(0.633765, 0, 0, 0, 0.633765, 0, 0, 0, 0.882421, -1.02153, 0.793772, 0.0223775)
+sprite_frames = SubResource("SpriteFrames_vl0ns")
+animation = &"new_animation"
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Pull"]
+transform = Transform3D(-4.37114e-08, 0, 5.42322, 0, 1, 0, -1, 0, -2.37057e-07, -0.719938, 0.780925, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.714603, 0, 0, 0, 1.20718, 0, 0, 0, 1, 0.104161, 0.607151, 0.0208631)
+shape = SubResource("BoxShape3D_np86l")
+disabled = true
+
+[node name="Target" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Target"]
+transform = Transform3D(12.1571, 0, 0, 0, 4.90757, 0, 0, 0, 8.06324, 0, 0, 0)
+shape = SubResource("SphereShape3D_q474f")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.111
+autostart = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_awl8j")
+
+[connection signal="body_entered" from="Target" to="." method="_on_target_body_entered"]
+[connection signal="body_exited" from="Target" to="." method="_on_target_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

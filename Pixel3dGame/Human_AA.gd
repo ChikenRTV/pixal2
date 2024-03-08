@@ -6,6 +6,8 @@ var HPZ = 3
 var RANGE = 3
 var HIT_CAN = false
 const gravity = 9.8
+var bombIs = false
+
 func _physics_process(delta):
 	
 	if not is_on_floor():
@@ -80,3 +82,19 @@ func _on_timer_timeout():
 		look_at(Vector3(player.global_position.x,0,player.global_position.z), Vector3.UP)
 		if HIT_CAN == false:
 			target_location(player.global_position)
+
+func EN_Bomb():
+	bombIs = true
+	
+func EX_Bomb():
+	bombIs = false
+	
+func Expouse_Bomb():
+	if bombIs == true:
+			$"../Player".dead_enemy()
+			$GPUParticles3D.emitting = true
+			await get_tree().create_timer(0.1).timeout
+			$MeshInstance3D.visible = false
+			await get_tree().create_timer(0.9).timeout
+		
+			queue_free()

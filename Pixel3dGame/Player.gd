@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const SPEED = 8.0
 const JUMP_VELOCITY = 8.5
-const SENSITIVITY = 0.01
+const SENSITIVITY = 0.03
 var PATRONS = 10
 var ENEMYCON = 10
 var PLAYERHP = 100
@@ -103,9 +103,8 @@ func Player_input(delta):
 			$Patrons/Label.text = str(PATRONS)
 			pistolAnim.play("lasergunShoot")
 			var instance = bullet.instantiate()
-			instance.position = pistol_ray.global_position
-			instance.transform = $Head/Camera3D.global_transform
-			print($Head/Camera3D.global_transform)
+			instance.global_position = pistol_ray.global_position
+			instance.global_transform = pistol_ray.global_transform
 			get_parent().add_child(instance)
 		if !pistolAnim.is_playing() and PATRONS <=0 :
 			$Patrons/Label.text = "Перезарядка"
@@ -123,12 +122,16 @@ func buy_t(sa):
 		$Control/OpenE.visible = false
 		sa.get_node("CollisionShape3D").disabled = true
 		$"..".buy_t(sa.global_position)
+	if Input.is_action_just_pressed("R"):
+		sa.visible = false
+		$Control/OpenE.visible = false
+		sa.get_node("CollisionShape3D").disabled = true
+		$"..".buy_t2(sa.global_position)
 	
 
-func hit_me():
-	if PLAYERHP > 0 and HIT_S == false: 
+func takeDamage(dmg):
 		HIT_S = true
-		PLAYERHP -= 5
+		PLAYERHP -= dmg
 		$DamageRed.visible = true
 		$Control/ColorRect.scale.x = PLAYERHP / 10
 		if PLAYERHP <= 0: 

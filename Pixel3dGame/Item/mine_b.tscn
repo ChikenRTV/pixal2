@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://ihg5frovnjgj"]
+
+[ext_resource type="Script" path="res://Item/mine_b.gd" id="1_gmt28"]
+[ext_resource type="AudioStream" uid="uid://o6wsmyrt4plt" path="res://Bullet/CubeExposion.wav" id="2_3ukrt"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xiqr1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhmgs"]
+albedo_color = Color(0.756863, 0.0705882, 0.0862745, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yonfk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0tjf2"]
+
+[node name="MineB" type="Area3D"]
+script = ExtResource("1_gmt28")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.134944, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_xiqr1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.811545, 0, 0, 0, 0.261069, 0, 0, 0, 0.811545, 0, 1.06824, 0)
+material_override = SubResource("StandardMaterial3D_bhmgs")
+mesh = SubResource("CylinderMesh_xiqr1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(4.77844, 0, 0, 0, 1, 0, 0, 0, 4.32205, 0, 0, 0)
+shape = SubResource("SphereShape3D_yonfk")
+
+[node name="Bomb!" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bomb!"]
+shape = SubResource("BoxShape3D_0tjf2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_3ukrt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="Bomb!" to="." method="_on_bomb_body_entered"]

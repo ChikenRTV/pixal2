@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cba40p2u3478k"]
+[gd_scene load_steps=8 format=3 uid="uid://cba40p2u3478k"]
 
 [ext_resource type="Script" path="res://Item/energy.gd" id="1_uydep"]
 [ext_resource type="ArrayMesh" uid="uid://ci5jcpdbvlwec" path="res://PlayerCusok/Battrel.obj" id="1_xmlv3"]
+[ext_resource type="AudioStream" uid="uid://o6wsmyrt4plt" path="res://Bullet/CubeExposion.wav" id="3_na7tb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckdy3"]
 albedo_color = Color(0.266667, 0.266667, 0.266667, 1)
@@ -39,5 +40,8 @@ mesh = SubResource("CylinderMesh_u38yg")
 transform = Transform3D(0.228275, 0, 0, 0, 0.228275, 0, 0, 0, 0.228275, 0.210625, -0.100116, 0.0103163)
 material_override = SubResource("StandardMaterial3D_gpi0e")
 mesh = ExtResource("1_xmlv3")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_na7tb")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

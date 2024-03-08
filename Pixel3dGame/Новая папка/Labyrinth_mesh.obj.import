@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://jhmtppw5bjkt"
+path="res://.godot/imported/Labyrinth_mesh.obj-e698f2f03aed931d6e543daa9de6ee91.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Labyrinth_mesh.obj-e698f2f03aed931d6e543daa9de6ee91.mesh"]
+
+source_file="res://Новая папка/Labyrinth_mesh.obj"
+dest_files=["res://.godot/imported/Labyrinth_mesh.obj-e698f2f03aed931d6e543daa9de6ee91.mesh", "res://.godot/imported/Labyrinth_mesh.obj-e698f2f03aed931d6e543daa9de6ee91.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

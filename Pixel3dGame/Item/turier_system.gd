@@ -28,8 +28,8 @@ func _on_target_body_exited(body):
 
 func _on_timer_timeout():
 	if TARGET:
-		look_at(Vector3(TARGET.global_position.x,0,TARGET.global_position.z), Vector3.UP)
-		TARGET.hit2()
+		$Head.look_at(Vector3(TARGET.global_position.x,TARGET.global_position.y,TARGET.global_position.z), Vector3.UP)
+		TARGET.takeDamage(1)
 		$AudioStreamPlayer3D.play()
 		anim.play("Shoot")
 	else:

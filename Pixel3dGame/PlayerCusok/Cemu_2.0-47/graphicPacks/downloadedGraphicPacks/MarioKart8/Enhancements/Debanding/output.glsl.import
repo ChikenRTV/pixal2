@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bysfgw7ek147x"
+path="res://.godot/imported/output.glsl-e6504f0012e8b76fcee55ac2c0bcffef.res"
+
+[deps]
+
+source_file="res://PlayerCusok/Cemu_2.0-47/graphicPacks/downloadedGraphicPacks/MarioKart8/Enhancements/Debanding/output.glsl"
+dest_files=["res://.godot/imported/output.glsl-e6504f0012e8b76fcee55ac2c0bcffef.res"]
+
+[params]
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqpm2tdrb07l2"]
+[gd_scene load_steps=27 format=3 uid="uid://bqpm2tdrb07l2"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_ltf0l"]
 [ext_resource type="PackedScene" uid="uid://dfltsmkf002ly" path="res://pistol.tscn" id="2_qyc0g"]
@@ -34,7 +34,22 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2v6qw"]
+resource_name = "Fade_In_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_hv4ld"]
@@ -55,6 +70,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xv6dt"]
 _data = {
 "Fade_In": SubResource("Animation_cimpo"),
+"Fade_In_2": SubResource("Animation_2v6qw"),
 "Stand": SubResource("Animation_hv4ld")
 }
 
@@ -85,7 +101,7 @@ visible = false
 mesh = SubResource("CapsuleMesh_0nibf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.33645, 0, 0, 0, 2.28787, 0, 0, 0, 1, 0, 2.1019, 0)
+transform = Transform3D(1.66859, 0, 0, 0, 2.28787, 0, 0, 0, 1.79695, 0, 2.1019, 0)
 shape = SubResource("ConvexPolygonShape3D_g5o52")
 
 [node name="Head" type="Node3D" parent="."]
@@ -136,13 +152,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="OpenE" type="Label" parent="Control"]
-visible = false
 layout_mode = 0
 offset_left = 579.0
 offset_top = 583.0
 offset_right = 812.0
 offset_bottom = 650.0
-text = "E To Open"
+text = "E Турель
+R Мина"
 label_settings = SubResource("LabelSettings_2s3dd")
 
 [node name="Label" type="Label" parent="Control"]
@@ -171,7 +187,7 @@ offset_left = -34.0
 offset_top = -42.0
 offset_right = 1342.0
 offset_bottom = 784.0
-color = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 0)
 
 [node name="Move" type="AnimationPlayer" parent="Control/White"]
 libraries = {
@@ -186,10 +202,10 @@ texture = ExtResource("7_77vx1")
 
 [node name="Black" type="ColorRect" parent="Control"]
 layout_mode = 0
-offset_left = -28.0
-offset_top = -31.0
-offset_right = 1348.0
-offset_bottom = 795.0
+offset_left = -33.0
+offset_top = -55.0
+offset_right = 1343.0
+offset_bottom = 771.0
 color = Color(1, 1, 1, 0)
 
 [node name="Move" type="AnimationPlayer" parent="Control/Black"]
@@ -198,6 +214,7 @@ libraries = {
 }
 
 [node name="ColisonItem" type="Area3D" parent="."]
+transform = Transform3D(3.58468, 0, 0, 0, 1.8273, 0, 0, 0, 4.53601, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ColisonItem"]
 transform = Transform3D(2.60323, 0, 0, 0, 2.45092, 0, 0, 0, 2.50578, 0, 1.14388, 0)

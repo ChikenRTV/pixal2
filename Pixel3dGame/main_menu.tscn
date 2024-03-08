@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://txs3hrwo0esu"]
+[gd_scene load_steps=23 format=3 uid="uid://txs3hrwo0esu"]
 
 [ext_resource type="FontFile" uid="uid://btwgtlwanbp4j" path="res://tahoma.ttf" id="1_so4td"]
 [ext_resource type="Script" path="res://main_menu.gd" id="2_wimkc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://MainMusic.gd" id="6_0v4n8"]
 [ext_resource type="AudioStream" uid="uid://c1lu2jgwphppt" path="res://MainMusic.wav" id="6_f2f2k"]
 [ext_resource type="Texture2D" uid="uid://bsfp0ydqhlkof" path="res://Levels/CityImage.png" id="8_krtk5"]
+[ext_resource type="Texture2D" uid="uid://2cty7lvvpmpo" path="res://Levels/ButtonImage.png" id="8_rxo0q"]
 
 [sub_resource type="Theme" id="Theme_6g5qx"]
 Button/colors/font_color = Color(0.376471, 0.298039, 0.396078, 1)
@@ -50,6 +51,21 @@ background_mode = 2
 sky = SubResource("Sky_lhe2y")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_31yq8"]
+texture = ExtResource("8_rxo0q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gi7w5"]
+texture = ExtResource("8_rxo0q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bc4h3"]
+texture = ExtResource("8_rxo0q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_esbok"]
+texture = ExtResource("8_rxo0q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nc8r0"]
+texture = ExtResource("8_rxo0q")
 
 [sub_resource type="Animation" id="Animation_mvmes"]
 resource_name = "Close"
@@ -118,6 +134,9 @@ tooltip_text = "ыф"
 theme_override_colors/font_color = Color(0, 0.984314, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.380392, 0.380392, 0.380392, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_31yq8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_31yq8")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_31yq8")
 text = "Play"
 
 [node name="Second" type="Control" parent="."]
@@ -140,6 +159,9 @@ offset_left = 163.0
 offset_top = 142.0
 offset_right = 425.0
 offset_bottom = 224.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_gi7w5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gi7w5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gi7w5")
 text = "Level 1
 "
 
@@ -149,6 +171,9 @@ offset_left = 163.0
 offset_top = 28.0
 offset_right = 425.0
 offset_bottom = 110.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_bc4h3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bc4h3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_bc4h3")
 text = "Обучение
 "
 
@@ -158,6 +183,9 @@ offset_left = 163.0
 offset_top = 234.0
 offset_right = 425.0
 offset_bottom = 316.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_esbok")
+theme_override_styles/hover = SubResource("StyleBoxTexture_esbok")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_esbok")
 text = "Level 2
 "
 
@@ -167,6 +195,9 @@ offset_left = 161.0
 offset_top = 344.0
 offset_right = 423.0
 offset_bottom = 426.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_nc8r0")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nc8r0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nc8r0")
 text = "Level 3
 "
 

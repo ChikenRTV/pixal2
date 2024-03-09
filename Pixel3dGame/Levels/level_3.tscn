@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://dymg47ji7ho4q"]
+
+[ext_resource type="Texture2D" uid="uid://dqrjxjvjh1lff" path="res://Texture/texture_asfalit.png" id="1_eln4l"]
+[ext_resource type="PackedScene" uid="uid://bqpm2tdrb07l2" path="res://player.tscn" id="2_pubnk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mxce3"]
+sky_top_color = Color(0.0156863, 0.027451, 0.0784314, 1)
+sky_horizon_color = Color(0.317647, 0.337255, 0.647059, 1)
+ground_bottom_color = Color(0.113725, 0.160784, 0.301961, 1)
+ground_horizon_color = Color(0.117647, 0.12549, 0.152941, 1)
+
+[sub_resource type="Sky" id="Sky_mm3h8"]
+sky_material = SubResource("ProceduralSkyMaterial_mxce3")
+
+[sub_resource type="Environment" id="Environment_isngy"]
+background_mode = 2
+sky = SubResource("Sky_mm3h8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iobpq"]
+albedo_color = Color(0.266667, 0.266667, 0.266667, 1)
+albedo_texture = ExtResource("1_eln4l")
+uv1_scale = Vector3(50, 50, 50)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_w66bn"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mri1b"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1rkqi"]
+albedo_color = Color(0.266575, 0.266575, 0.266575, 1)
+albedo_texture = ExtResource("1_eln4l")
+uv1_scale = Vector3(50, 50, 50)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iju8e"]
+albedo_texture = ExtResource("1_eln4l")
+uv1_scale = Vector3(100, 100, 50)
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oxwif"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Level3" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_isngy")
+
+[node name="Floor7" type="StaticBody3D" parent="."]
+transform = Transform3D(-1.65361e-07, 0, 58.6364, 0, 2.8, 0, -3.78301, 0, -2.56308e-06, -100.333, 1.28116, -25.833)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor7"]
+transform = Transform3D(7.344, 0, 0, 0, 1, 0, 0, 0, 7.83, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_iobpq")
+mesh = SubResource("BoxMesh_w66bn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor7"]
+transform = Transform3D(7.344, 0, 0, 0, 1, 0, 0, 0, 7.83, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_mri1b")
+
+[node name="Floor8" type="StaticBody3D" parent="."]
+transform = Transform3D(-1.65361e-07, 0, 48.312, 0, 2.8, 0, -3.78301, 0, -2.11178e-06, -100.333, 1.54158, 22.667)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor8"]
+transform = Transform3D(7.344, 0, 0, 0, 1, 0, 0, 0, 7.83, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_1rkqi")
+mesh = SubResource("BoxMesh_w66bn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor8"]
+transform = Transform3D(7.344, 0, 0, 0, 1, 0, -1.77636e-15, 0, 7.83, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_mri1b")
+
+[node name="Floor9" type="StaticBody3D" parent="."]
+transform = Transform3D(8.92949e-07, 0, -39.7706, 0, 0.5, 0, 6.80943, 0, 5.21528e-06, -45.61, 1.12893, -6.42799)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor9"]
+transform = Transform3D(7.344, 0, 0, 0, 1, 0, 0, 0, 9.4743, 0, 1, 0.109777)
+material_override = SubResource("StandardMaterial3D_iju8e")
+mesh = SubResource("BoxMesh_w66bn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor9"]
+transform = Transform3D(7.344, 0, 4.54747e-13, 0, 1, 0, -1.77636e-15, 0, 9.4743, 0, 1, 0.109777)
+shape = SubResource("ConvexPolygonShape3D_oxwif")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 5.0
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_pubnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2355, 1.87893, -4.19654)

@@ -1,26 +1,33 @@
 extends CharacterBody3D
 
 
-const SPEED = 8.0
+const SPEED = 30.0
 const JUMP_VELOCITY = 8.5
 const SENSITIVITY = 0.03
 var PATRONS = 10
 var ENEMYCON = 10
 var PLAYERHP = 100
 var HIT_S = false
+var SELECT_WEAPON = 2
+var IsMove = true
+
 var FIRST_FACE = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
 var falling = false
 
+@onready var hub = $".."
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var pistolAnim = $Head/Camera3D/Pistol/LaserGun/AnimationPlayer
+@onready var pistolAnim = $Head/Camera3D/Pistol/AnimationPlayer
 @onready var pistol = $Head/Camera3D/Pistol/AudioStreamPlayer
 @onready var pistol_ray = $Head/Camera3D/Pistol/RayCast3D
+@onready var pistol2Anim = $Head/Camera3D/LaserSword/AnimationPlayer
+@onready var pistol2 = $Head/Camera3D/LaserSword/AudioStreamPlayer
+@onready var pistol2_ray = $Head/Camera3D/LaserSword/RayCast3D
 
-var bullet = load("res://Bullet/bullet.tscn")
+var bullet = load("res://Bullet/sword_attacker.tscn")
 
 
 
@@ -30,11 +37,14 @@ func _ready():
 	$Control/Black/Move.play("Fade_In")
 	$EnemyIcon/Label.text = str(ENEMYCON)
 	$Control/ColorRect.scale.x = PLAYERHP / 10
+	weapon_select(1)
 	if Global.Rig_Det == false:
 		$Head/Camera3D/Pistol.position.x = -0.317
+		$Head/Camera3D/LaserSword.position.x = -0.317
 		$Head/LegOther.position.x = 0.317
 	elif Global.Rig_Det == true:
 		$Head/Camera3D/Pistol.position.x = 0.317
+		$Head/Camera3D/LaserSword.position.x = 0.317
 		$Head/LegOther.position.x = -0.317
 	
 func _input(event):
@@ -47,7 +57,7 @@ func _input(event):
 
 func _physics_process(delta):
 	# Add the gravity.
-	if PLAYERHP > 0:
+	if PLAYERHP > 0 and IsMove == true:
 		Player_input(delta)
 	if FIRST_FACE == false:
 		$Head/Camera3D.visible = false
@@ -97,40 +107,55 @@ func Player_input(delta):
 			velocity.z = lerp(velocity.z, direction.z * SPEED, delta * 2)
 		
 	if Input.is_action_pressed("shoot"):
-		if !pistolAnim.is_playing() and PATRONS >0 :
-			pistol.play()
-			PATRONS -= 1
-			$Patrons/Label.text = str(PATRONS)
-			pistolAnim.play("lasergunShoot")
-			var instance = bullet.instantiate()
-			instance.global_position = pistol_ray.global_position
-			instance.global_transform = pistol_ray.global_transform
-			get_parent().add_child(instance)
+		if SELECT_WEAPON == 1:
+			if !pistolAnim.is_playing() and PATRONS >0 :
+				pistol.play()
+				PATRONS -= 1
+				$Patrons/Label.text = str(PATRONS)
+				pistolAnim.play("Shoot")
+				var instance = bullet.instantiate()
+				instance.global_position = pistol_ray.global_position
+				instance.global_transform = pistol_ray.global_transform
+				get_parent().add_child(instance)
+		elif SELECT_WEAPON == 2:
+			if !pistol2Anim.is_playing():
+				pistol2.play()
+				$Head/Camera3D/LaserSword/ColisonEnemy.monitoring = false
+				$Head/Camera3D/LaserSword.canKill = true
+				pistol2Anim.play("Shoot")
+				await get_tree().create_timer(0.5).timeout
+				$Head/Camera3D/LaserSword/ColisonEnemy.monitoring = true
+				$Head/Camera3D/LaserSword.canKill = false
 		if !pistolAnim.is_playing() and PATRONS <=0 :
 			$Patrons/Label.text = "Перезарядка"
 			pistolAnim.play("magReload")
 			await get_tree().create_timer(1).timeout
 			PATRONS = 10
 			$Patrons/Label.text = str(PATRONS)
+	if Input.is_action_just_pressed("1"):
+		weapon_select(1)
+	if Input.is_action_just_pressed("2"):
+		weapon_select(2)
 
 	move_and_slide()
 
 func buy_t(sa):
 	$Control/OpenE.visible = true
-	if Input.is_action_just_pressed("E"):
+	if Input.is_action_just_pressed("E") and hub.battar >= 4:
 		sa.visible = false
 		$Control/OpenE.visible = false
 		sa.get_node("CollisionShape3D").disabled = true
 		$"..".buy_t(sa.global_position)
-	if Input.is_action_just_pressed("R"):
+	if Input.is_action_just_pressed("R") and hub.battar >= 2:
 		sa.visible = false
 		$Control/OpenE.visible = false
 		sa.get_node("CollisionShape3D").disabled = true
 		$"..".buy_t2(sa.global_position)
 	
+func close_t():
+	$Control/OpenE.visible = false
 
 func takeDamage(dmg):
-		HIT_S = true
 		PLAYERHP -= dmg
 		$DamageRed.visible = true
 		$Control/ColorRect.scale.x = PLAYERHP / 10
@@ -138,7 +163,6 @@ func takeDamage(dmg):
 			$GameOver.visible = true
 			Input.set_mouse_mode(0)
 		await get_tree().create_timer(0.1).timeout
-		HIT_S = false
 		$DamageRed.visible = false
 func _on_colison_item_body_entered(body):
 	
@@ -174,6 +198,7 @@ func dead_enemy():
 func The_End():
 	$Control/White/Move.play("Fade_In")
 	await get_tree().create_timer(4).timeout
+	Input.set_mouse_mode(0)
 	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 
@@ -182,3 +207,13 @@ func _on_game_over_button_pressed():
 
 func get_batarey():
 	$"..".get_batarey()
+
+func weapon_select(w):
+	SELECT_WEAPON = w
+	if SELECT_WEAPON == 1:
+		$Head/Camera3D/LaserSword.visible = false
+		$Head/Camera3D/Pistol.visible = true
+	
+	elif SELECT_WEAPON == 2:
+		$Head/Camera3D/LaserSword.visible = true
+		$Head/Camera3D/Pistol.visible = false

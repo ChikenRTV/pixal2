@@ -204,8 +204,8 @@ text = "Level 3
 [node name="CityImage" type="Sprite2D" parent="."]
 modulate = Color(0.443137, 0.352941, 0.552941, 1)
 z_index = -1
-position = Vector2(642, 368.5)
-scale = Vector2(0.66875, 0.678704)
+position = Vector2(642, 361)
+scale = Vector2(0.66875, 0.692593)
 texture = ExtResource("8_krtk5")
 
 [node name="Fade" type="AnimationPlayer" parent="."]

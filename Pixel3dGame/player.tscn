@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://bqpm2tdrb07l2"]
+[gd_scene load_steps=29 format=3 uid="uid://bqpm2tdrb07l2"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_ltf0l"]
 [ext_resource type="PackedScene" uid="uid://dfltsmkf002ly" path="res://pistol.tscn" id="2_qyc0g"]
 [ext_resource type="ArrayMesh" uid="uid://b5kthf02xv1i7" path="res://PlayerCusok/Rig.obj" id="3_o70ts"]
+[ext_resource type="PackedScene" uid="uid://ctgo6wqniqe60" path="res://LazerGun/LaserSword.tscn" id="4_ah1qi"]
 [ext_resource type="ArrayMesh" uid="uid://d2xojukdy65h7" path="res://PlayerCusok/Player/Rig.obj" id="4_l6ms3"]
 [ext_resource type="Texture2D" uid="uid://db3hli0y7jxed" path="res://Pistol/Patrons.png" id="4_ucgdf"]
 [ext_resource type="Texture2D" uid="uid://cw73t3fjel6bc" path="res://chr_knight/EnemyIcon.png" id="5_ldth0"]
@@ -13,6 +14,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c0jolo21p4nv7" path="res://PlayerCusok/Player/Head.obj" id="11_pe5vc"]
 [ext_resource type="ArrayMesh" uid="uid://dsdats1bxhu0y" path="res://PlayerCusok/Player/Torso.obj" id="12_e3qsn"]
 [ext_resource type="ArrayMesh" uid="uid://cqa3vc24c8v8t" path="res://PlayerCusok/Player/Leg.obj" id="13_v5mx7"]
+[ext_resource type="AudioStream" uid="uid://o6wsmyrt4plt" path="res://Bullet/CubeExposion.wav" id="15_snjo0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0nibf"]
 
@@ -112,8 +114,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.22879, -0.587481)
 [node name="Pistol" parent="Head/Camera3D" instance=ExtResource("2_qyc0g")]
 transform = Transform3D(0.544784, 0, 0, 0, 0.555907, 0, 0, 0, 0.53567, -0.801482, -0.668247, -1.41442)
 
-[node name="Rig2" type="MeshInstance3D" parent="Head/Camera3D/Pistol"]
-transform = Transform3D(-1.83559, 0, 0, 0, 7.86308e-08, -1.79886, 0, 1.86682, 8.16014e-08, 1.39279, 1.35544, -2.63899)
+[node name="LaserSword" parent="Head/Camera3D" instance=ExtResource("4_ah1qi")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.59925, -2.21828, -1.80802)
+
+[node name="Rig2" type="MeshInstance3D" parent="Head/Camera3D/LaserSword"]
+transform = Transform3D(4.81263e-08, 1.11973, 4.89452e-08, 0, 4.71634e-08, -1.07897, 1.101, -4.89451e-08, 5.52709e-15, -1.3854, 2.31191, -0.76253)
 mesh = ExtResource("4_l6ms3")
 skeleton = NodePath("../../../..")
 
@@ -152,13 +157,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="OpenE" type="Label" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 579.0
 offset_top = 583.0
 offset_right = 812.0
 offset_bottom = 650.0
-text = "E Турель
-R Мина"
+text = "E Турель(4)
+R Мина(2)"
 label_settings = SubResource("LabelSettings_2s3dd")
 
 [node name="Label" type="Label" parent="Control"]
@@ -206,7 +212,7 @@ offset_left = -33.0
 offset_top = -55.0
 offset_right = 1343.0
 offset_bottom = 771.0
-color = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="Move" type="AnimationPlayer" parent="Control/Black"]
 libraries = {
@@ -327,6 +333,9 @@ mesh = ExtResource("13_v5mx7")
 [node name="Leg2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.648083, 0, 0, 0, 0.648083, 0, 0, 0, 0.648083, 0.236917, 0.0392248, -0.385587)
 mesh = ExtResource("13_v5mx7")
+
+[node name="Explose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_snjo0")
 
 [connection signal="area_entered" from="ColisonItem" to="." method="_on_colison_item_area_entered"]
 [connection signal="body_entered" from="ColisonItem" to="." method="_on_colison_item_body_entered"]

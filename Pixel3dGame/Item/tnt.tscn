@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbaj6p88j0bbi"]
+
+[ext_resource type="ArrayMesh" uid="uid://btycwxno0u3qf" path="res://Item/Tnt.obj" id="1_qos1g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrpyc"]
+albedo_color = Color(0.509804, 0.0705882, 0.239216, 1)
+
+[node name="TNT" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68148, 0, 0)
+
+[node name="Tnt" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.13672, -31.2143, 2.04472)
+material_override = SubResource("StandardMaterial3D_jrpyc")
+mesh = ExtResource("1_qos1g")
+skeleton = NodePath("../..")

@@ -119,6 +119,15 @@ offset_right = 1174.0
 offset_bottom = 85.0
 text = "Правая рука"
 
+[node name="CheckButton2" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 852.0
+offset_top = 120.0
+offset_right = 1174.0
+offset_bottom = 187.0
+text = "Полный экран
+"
+
 [node name="First" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -214,6 +223,7 @@ libraries = {
 }
 
 [connection signal="pressed" from="CheckButton" to="." method="_on_check_button_pressed"]
+[connection signal="pressed" from="CheckButton2" to="." method="_on_check_button_2_pressed"]
 [connection signal="pressed" from="First/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Second/ColorRect/Level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="Second/ColorRect/Tutoril" to="." method="_on_tutoril_pressed"]

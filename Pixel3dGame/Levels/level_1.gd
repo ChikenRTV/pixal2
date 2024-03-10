@@ -4,6 +4,11 @@ var TimeSurivur = 30
 var HpBashni = 160
 var battar = 5
 var startSave = false
+var DiologText = ["Забыл сказать что, если ты хочешь поменять оружие,то нажимай на 1 или 2 то ты поменяешь оружие",
+"Ворота закрыты. Чтобы открыть, нужно пойти к дону",
+"Чтобы управлять дроном, нажимайте на стрелки, а чтобы летать на SPACE",
+'Ворота Открыты!',
+'Космический ТНТ долго будит подрываться,защищайте его чтобы люди не потушили']
 
 
 var bullet = load("res://Enemy/enemy.tscn")
@@ -12,6 +17,11 @@ var TUR3 = load("res://Item/mine_b.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$tENTE.visible = false
+	$Player.IsMove = false
+	$Player.visible = false
+	$StartSceene.set_current(true)
+	$Diolog/Label.text = ""
 	await get_tree().create_timer(2).timeout
 	$MainSituation/AnimationPlayer.play("Fade1")
 	await get_tree().create_timer(2).timeout
@@ -20,10 +30,21 @@ func _ready():
 	await get_tree().create_timer(2).timeout
 	$MainSituation/AnimationPlayer.play("Fade1_3")
 	await get_tree().create_timer(1).timeout
+	get_tree().call_group('npc','hit')
 	$Player/Jump2.play()
 	await get_tree().create_timer(7).timeout
 	$Sirena.stop()
 	$Music.play()
+	$Player/Control/Black/Move.play("Fade_In_2")
+	await get_tree().create_timer(1).timeout
+	$Player/Control/Black/Move.play("Fade_In")
+	$Player/Head/Camera3D.set_current(true)
+	$Player.IsMove = true
+	$Player.visible = true
+	$Diolog/Label.text = DiologText[0]
+	$Diolog/Move.play("fade-in")
+	await get_tree().create_timer(4).timeout
+	$Diolog/Move.play("fade-out")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,10 +71,11 @@ func _on_timer_sec_timeout():
 		$SaveZone/SaveHp/Timer.text = "Время:" + str(TimeSurivur)
 		if TimeSurivur <= 0:
 			$SpawnEnemy.queue_free()
-			$Control/Black.play("Fade_In_2")
+			$Player/Control/Black/Move.play("Fade_In_2")
 			$Explose.play()
 			get_tree().call_group('enemy','hit')
 			$Floor5/Cave.visible = false
+			$tENTE.visible = false
 			await get_tree().create_timer(2).timeout
 			get_tree().change_scene_to_file("res://main_menu.tscn")
 			Input.set_mouse_mode(0)
@@ -70,12 +92,18 @@ func _on_save_zone_body_entered(body):
 		$Music.stop()
 		startSave = true
 		$Sirena2.play()
+		$tENTE.visible = true
 		$Tureli.visible = true
 		$SaveZone/SaveHp/Timer.text = "Время:" + str(TimeSurivur)
 		$SaveZone/SaveHp/ennergy.text = "Энергия:" + str(battar)
 		$SaveZone/SaveHp.visible = true
 		$SaveZone.monitoring = false
 		$SaveZone.monitorable = false
+		$ZaRabotu.play()
+		$Diolog/Label.text = DiologText[4]
+		$Diolog/Move.play("fade-in")
+		await get_tree().create_timer(4).timeout
+		$Diolog/Move.play("fade-out")
 		
 
 
@@ -97,13 +125,38 @@ func _on_fly_ver_body_entered(body):
 	if body.is_in_group('player'):
 		$Helecopter/Camera3D.set_current(true)
 		body.IsMove = false
+		$Diolog/Label.text = DiologText[2]
+		$Diolog/Move.play("fade-in")
 		$Helecopter.IsMove = true
+		await get_tree().create_timer(4).timeout
+		$Diolog/Move.play("fade-out")
 
 
-func _on_rachek_body_entered(body):
+
+
+
+func _on_diolog_sa_body_entered(body):
+	if body.is_in_group('player'):
+		$Diolog/Label.text = DiologText[1]
+		$Diolog/Move.play("fade-in")
+		$DiologSA.queue_free()
+		await get_tree().create_timer(4).timeout
+		$Diolog/Move.play("fade-out")
+
+
+func _on_mine_b_2_body_entered(body):
 	if body.is_in_group('heli'):
+		$Worota/Open.play()
 		$Player/Head/Camera3D.set_current(true)
 		body.IsMove = true
 		$Worota.visible = false
-		$Worota/CollisionShape3D.disabled = false
+		$Worota/CollisionShape3D.queue_free()
 		$Helecopter.IsMove = false
+		if $DiologSA:
+			$DiologSA.queue_free()
+		$Diolog/Label.text = DiologText[3]
+		$Player.IsMove = true
+		$Diolog/Move.play("fade-in")
+		await get_tree().create_timer(4).timeout
+		$Diolog/Move.play("fade-out")
+		

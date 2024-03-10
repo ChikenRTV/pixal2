@@ -1,6 +1,6 @@
 extends Node3D
 
-const SPEED = 40.0
+const SPEED = 80.0
 @onready var mesh = $MeshInstance3D
 @onready var ray = $RayCast3D
 @onready var particles = $GPUParticles3D
@@ -16,9 +16,6 @@ func _process(delta):
 			print("Попал")
 			ray.get_collider().takeDamage(1)
 			
-		if ray.get_collider().is_in_group("player"):
-			print("Попал")
-			ray.get_collider().takeDamage(5)
 			
 		mesh.visible = false
 		particles.emitting = true

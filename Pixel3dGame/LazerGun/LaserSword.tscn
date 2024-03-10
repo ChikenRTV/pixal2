@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ctgo6wqniqe60"]
+[gd_scene load_steps=23 format=3 uid="uid://ctgo6wqniqe60"]
 
 [ext_resource type="Texture2D" uid="uid://cc0h0klf8t75l" path="res://LazerGun/LaserGun_Base_Base_color.png" id="1_ex2vv"]
 [ext_resource type="Script" path="res://LazerGun/LaserSword.gd" id="1_otr6d"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://el6nnvylsbb5" path="res://LazerGun/LaserGun_Base_Metallic-Base_Roughness.png" id="7_60etq"]
 [ext_resource type="Texture2D" uid="uid://5s0ttngpbf00" path="res://LazerGun/LaserGun_Base_Normal_OpenGL.png" id="8_vudfd"]
 [ext_resource type="AudioStream" uid="uid://shqlu5ep2qjf" path="res://PistolShoot.wav" id="9_8oivq"]
+[ext_resource type="ArrayMesh" uid="uid://d2xojukdy65h7" path="res://PlayerCusok/Player/Rig.obj" id="10_w2x16"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xarx5"]
 resource_name = "Base.001"
@@ -179,6 +180,11 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12051, 0.118348, 0.136104)
 mesh = SubResource("ArrayMesh_4buq3")
 skeleton = NodePath("")
+
+[node name="Rig2" type="MeshInstance3D" parent="lasergun"]
+transform = Transform3D(4.81263e-08, 1.11973, 4.89452e-08, 0, 4.71634e-08, -1.07897, 1.101, -4.89451e-08, 5.52709e-15, -2.26132, 0.857229, -0.76253)
+mesh = ExtResource("10_w2x16")
+skeleton = NodePath("../../../../..")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_8oivq")

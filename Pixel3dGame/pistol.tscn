@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfltsmkf002ly"]
+[gd_scene load_steps=8 format=3 uid="uid://dfltsmkf002ly"]
 
 [ext_resource type="AudioStream" uid="uid://shqlu5ep2qjf" path="res://PistolShoot.wav" id="2_deqmr"]
 [ext_resource type="PackedScene" uid="uid://cutbfveynld5j" path="res://LazerGun/LaserGun.tscn" id="3_8535o"]
 [ext_resource type="ArrayMesh" uid="uid://d2xojukdy65h7" path="res://PlayerCusok/Player/Rig.obj" id="3_hri1i"]
+[ext_resource type="ArrayMesh" uid="uid://s1fqu5dugt3m" path="res://Pistol/Sword/sword.obj" id="3_vmr3x"]
 
 [sub_resource type="Animation" id="Animation_xwhet"]
 resource_name = "Shoot"
@@ -19,6 +20,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0.71, 0), Vector3(0, 0.71, 1), Vector3(0, 0.71, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.25827, 0, 0.351724), Vector3(-0.258, 0, 1.352), Vector3(-0.25827, 0, 0.351724)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_at28w"]
@@ -49,9 +62,14 @@ visible = false
 
 [node name="Sword" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.8894e-06, 0.000912446, -0.38227, 0.43227, -0.00996692, 0, -0.00428544, -1.00536, -0.000346943, 0, 0.71, 0)
+visible = false
 mesh = SubResource("PrismMesh_ekwwb")
 
-[node name="Rig2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.83559, 0, 0, 0, 7.86308e-08, -1.79886, 0, 1.86682, 8.16014e-08, 1.39279, 1.35544, -3.26386)
+[node name="Sword2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0212739, 0.999774, 0, -0.999775, -0.0212739, -0.25827, 0, 0.351724)
+mesh = ExtResource("3_vmr3x")
+
+[node name="Rig2" type="MeshInstance3D" parent="Sword2"]
+transform = Transform3D(-1.83559, 2.56383e-09, -4.51712e-11, -4.99817e-10, -1.86639, 0.0382685, -3.23034e-11, -0.0397145, -1.79845, 1.65106, 3.58593, 1.43205)
 mesh = ExtResource("3_hri1i")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../../../../..")

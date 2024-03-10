@@ -14,5 +14,5 @@ func _process(delta):
 func _on_colison_enemy_body_entered(body):
 	if body.is_in_group("enemy"):
 		print("popooppooppopopo")
-	if body.is_in_group("enemy"):
+	if body.is_in_group("enemy") and canKill == false:
 		body.takeDamage(1.5)

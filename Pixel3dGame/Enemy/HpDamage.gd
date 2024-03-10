@@ -1,12 +1,12 @@
 extends StaticBody3D
-var HPZ = 3
+var HPZ = 1
 var RANGE = 3
 var HIT_CAN = false
 @onready var targetin = $"../.."
 
-func hit():
+func takeDamage(dmg):
 	if HPZ > 0:
-		HPZ -= 3
+		HPZ -= dmg
 		print(HPZ)
 		if HPZ <= 0:
 		
@@ -19,6 +19,7 @@ func hit():
 			await get_tree().create_timer(0.9).timeout
 		
 			queue_free()
+
 
 
 

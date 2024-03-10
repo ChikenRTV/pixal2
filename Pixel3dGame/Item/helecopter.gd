@@ -22,7 +22,7 @@ func Input_helicopter(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
+	if direction and not is_on_floor():
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
@@ -38,6 +38,7 @@ func _physics_process(delta):
 func takeDamage(dmg):
 	$"../Player".takeDamage(dmg)
 
+
 func _on_colision_body_entered(body):
 	if body.is_in_group("lazer"):
-		takeDamage(23)
+		takeDamage(20)

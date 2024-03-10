@@ -190,6 +190,16 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = PackedFloat32Array(0, 1, -1.12051, 0.118348, 0.136104)
 
+[sub_resource type="Animation" id="Animation_ph731"]
+resource_name = "Attack"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lasergun")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.875922, 1.40378, 0, 0.3, 1, 0.876, 1.9, 0, 0.7, 1, -0.876, 1.404, 0, 1, 1, 0.875922, 1.40378, 0)
+
 [sub_resource type="Animation" id="Animation_juwtj"]
 resource_name = "CrateOpen"
 length = 0.416667
@@ -503,16 +513,6 @@ tracks/6/path = NodePath("lasergun/mag")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_ph731"]
-resource_name = "Attack"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("lasergun")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.875922, 1.40378, 0, 0.3, 1, 0.876, 1.9, 0, 0.7, 1, -0.876, 1.404, 0, 1, 1, 0.875922, 1.40378, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oti17"]
 _data = {

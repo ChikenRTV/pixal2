@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 30.0
+const SPEED = 14.0
 const JUMP_VELOCITY = 8.5
 const SENSITIVITY = 0.03
 var PATRONS = 10
@@ -10,6 +10,10 @@ var PLAYERHP = 100
 var HIT_S = false
 var SELECT_WEAPON = 2
 var IsMove = true
+var Group_Glav = ["Обучение",
+"Хьюстан,у нас проблемы!",
+"Обманчевый лаберинт",
+"Последняя Спасение"]
 
 var FIRST_FACE = true
 
@@ -35,7 +39,9 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$Patrons/Label.text = str(PATRONS)
 	$Control/Black/Move.play("Fade_In")
+	
 	$EnemyIcon/Label.text = str(ENEMYCON)
+	$Glavu/Label.text = Group_Glav[Global.Level_Number]
 	$Control/ColorRect.scale.x = PLAYERHP / 10
 	weapon_select(1)
 	if Global.Rig_Det == false:
@@ -46,6 +52,9 @@ func _ready():
 		$Head/Camera3D/Pistol.position.x = 0.317
 		$Head/Camera3D/LaserSword.position.x = 0.317
 		$Head/LegOther.position.x = -0.317
+	$Glavu/Move.play("in")
+	await get_tree().create_timer(2).timeout
+	$Glavu/Move.play("out")
 	
 func _input(event):
 	if PLAYERHP > 0 and FIRST_FACE == true:
@@ -59,6 +68,10 @@ func _physics_process(delta):
 	# Add the gravity.
 	if PLAYERHP > 0 and IsMove == true:
 		Player_input(delta)
+	if IsMove == true:
+		$Prihel.visible = true
+	elif IsMove == false:
+		$Prihel.visible = false
 	if FIRST_FACE == false:
 		$Head/Camera3D.visible = false
 		$Head/Pistol.visible = true
@@ -196,7 +209,8 @@ func dead_enemy():
 
 
 func The_End():
-	$Control/White/Move.play("Fade_In")
+	$Control/Black/Move.play("Fade_In")
+	IsMove = false
 	await get_tree().create_timer(4).timeout
 	Input.set_mouse_mode(0)
 	get_tree().change_scene_to_file("res://main_menu.tscn")
@@ -206,7 +220,8 @@ func _on_game_over_button_pressed():
 	get_tree().reload_current_scene()
 
 func get_batarey():
-	$"..".get_batarey()
+	if  $"..":
+		$"..".get_batarey()
 
 func weapon_select(w):
 	SELECT_WEAPON = w
@@ -217,3 +232,8 @@ func weapon_select(w):
 	elif SELECT_WEAPON == 2:
 		$Head/Camera3D/LaserSword.visible = true
 		$Head/Camera3D/Pistol.visible = false
+		
+func get_hp(h):
+	PLAYERHP += h
+	if PLAYERHP > 100:
+		PLAYERHP = 100

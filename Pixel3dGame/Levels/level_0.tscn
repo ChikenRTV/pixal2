@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cirfkx10hrjt8"]
+[gd_scene load_steps=24 format=3 uid="uid://cirfkx10hrjt8"]
 
 [ext_resource type="PackedScene" uid="uid://bqpm2tdrb07l2" path="res://player.tscn" id="1_abrjl"]
 [ext_resource type="Script" path="res://Levels/level_0.gd" id="1_vcw8d"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://beknm7abwii06" path="res://Mihan/target.tscn" id="4_kb2fj"]
 [ext_resource type="Texture2D" uid="uid://dl1fnvcx1yew1" path="res://PlayerCusok/Box1_diff.png" id="6_nd4c0"]
 [ext_resource type="ArrayMesh" uid="uid://bthmsvyr18qtp" path="res://PlayerCusok/xzzzz.obj" id="7_fnuv1"]
+[ext_resource type="Texture2D" uid="uid://brgg3hoqo3rg2" path="res://Levels/icon222.png" id="8_4qumj"]
+[ext_resource type="FontFile" uid="uid://b1yu6pbqcabv" path="res://tahomabd.ttf" id="9_73ws4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w7b0e"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -55,6 +57,8 @@ albedo_texture = ExtResource("6_nd4c0")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xfo00"]
 points = PackedVector3Array(-2.03131, 2.06232e-05, -15.0104, -2.03131, 2.99973, -15.0104, 0.968391, 2.06232e-05, -15.0104, -2.03131, 2.06232e-05, -12.0104, 0.968391, 2.99973, -15.0104, -2.03131, 3.00002, -12.5105, 0.968685, 2.06232e-05, -14.5106, 0.968685, 2.06232e-05, -12.0104, -2.03131, 3.00002, -12.0104, 0.968685, 0.499825, -14.5106, 0.468588, 3.00002, -12.5105, 0.968391, 2.99973, -12.0104, 0.968685, 0.499825, -12.0104, 0.468588, 3.00002, -12.0104)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pr0d"]
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_vcw8d")
 
@@ -71,6 +75,7 @@ collision_layer = 65
 
 [node name="TextDiolog" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.05006, 0, 0, 0, 1.8833, 0, 0, 0, 1, 1.513, 2.88727, -8.20337)
+visible = false
 mesh = SubResource("BoxMesh_ahvx5")
 
 [node name="Label3D" type="Label3D" parent="TextDiolog"]
@@ -85,6 +90,7 @@ outline_size = 80
 
 [node name="TextDiolog2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.9611e-08, 0, -1, 0, 1.8833, 0, 2.05006, 0, -4.37114e-08, 8.013, 4.38727, 17.7966)
+visible = false
 mesh = SubResource("BoxMesh_ahvx5")
 
 [node name="Label3D" type="Label3D" parent="TextDiolog2"]
@@ -99,6 +105,7 @@ outline_size = 80
 
 [node name="TextDiolog4" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.9611e-08, 0, -1, 0, 1.8833, 0, 2.05006, 0, -4.37114e-08, 8.013, 4.38727, 32.7966)
+visible = false
 mesh = SubResource("BoxMesh_ahvx5")
 
 [node name="Label3D" type="Label3D" parent="TextDiolog4"]
@@ -117,6 +124,7 @@ outline_size = 80
 
 [node name="TextDiolog3" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.05006, 0, 1.49012e-08, 0, 1.8833, 0, -5.96046e-08, 0, -1, -0.487, 7.38727, 60.2966)
+visible = false
 mesh = SubResource("BoxMesh_ahvx5")
 
 [node name="Label3D" type="Label3D" parent="TextDiolog3"]
@@ -345,5 +353,50 @@ skeleton = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BoxCreate"]
 shape = SubResource("ConvexPolygonShape3D_xfo00")
 
+[node name="Diolog" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon222" type="Sprite2D" parent="Diolog"]
+position = Vector2(52, 57)
+scale = Vector2(0.24125, 0.22)
+texture = ExtResource("8_4qumj")
+
+[node name="Label" type="Label" parent="Diolog"]
+modulate = Color(1, 1, 1, 0.7)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_73ws4")
+text = "Упс, нас закрыли. Давай попробуем в лабиринте найти"
+
+[node name="Diolog232" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Diolog232"]
+transform = Transform3D(28.728, 0, 0, 0, 32.64, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_3pr0d")
+
+[node name="Diolog233" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Diolog233"]
+transform = Transform3D(28.728, 0, 0, 0, 32.64, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_3pr0d")
+
+[node name="Diolog234" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Diolog234"]
+transform = Transform3D(28.728, 0, 0, 0, 32.64, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_3pr0d")
+
 [connection signal="body_entered" from="TheEndDoor" to="TheEndDoor" method="_on_body_entered"]
 [connection signal="body_entered" from="BoxCreate" to="." method="_on_box_create_body_entered"]
+[connection signal="body_entered" from="Diolog232" to="." method="_on_diolog_232_body_entered"]
+[connection signal="body_entered" from="Diolog233" to="." method="_on_diolog_233_body_entered"]
+[connection signal="body_entered" from="Diolog234" to="." method="_on_diolog_234_body_entered"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://nwe17gfaqlfc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6rka"]
+albedo_color = Color(0.243137, 0.243137, 0.243137, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k4hy4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7fna"]
+emission_enabled = true
+emission = Color(0.647059, 0.521569, 0.0784314, 1)
+emission_energy_multiplier = 32.0
+
+[node name="Lampa" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_d6rka")
+mesh = SubResource("BoxMesh_k4hy4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.36, 0, 0, 0, 5.54898, 0, 0, 0, 0.5, 0, 2.45057, 0)
+material_override = SubResource("StandardMaterial3D_d6rka")
+mesh = SubResource("BoxMesh_k4hy4")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.36, 0, 0, 0, 0.748332, -0.273774, 0, 0.748332, 0.273774, 0.0023852, 5.25457, 0)
+material_override = SubResource("StandardMaterial3D_d6rka")
+mesh = SubResource("BoxMesh_k4hy4")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.36, 0, 0, 0, 0, -0.387175, 0, 1.0583, 0, 0.0023852, 5.56779, 0.745741)
+material_override = SubResource("StandardMaterial3D_d6rka")
+mesh = SubResource("BoxMesh_k4hy4")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.36, 0, 0, 0, 0, -0.387175, 0, 1.0583, 0, 0.0023852, 5.26518, 0.745741)
+material_override = SubResource("StandardMaterial3D_m7fna")
+mesh = SubResource("BoxMesh_k4hy4")

@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsjel447hnvts"]
+[gd_scene load_steps=6 format=3 uid="uid://dsjel447hnvts"]
 
 [ext_resource type="Texture2D" uid="uid://dl1fnvcx1yew1" path="res://PlayerCusok/Box1_diff.png" id="1_7hd3h"]
+[ext_resource type="AudioStream" uid="uid://bem4m8or1qyw1" path="res://Decal/OpenWorota.wav" id="2_h7uqs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntbyf"]
-albedo_color = Color(0.447059, 0.286275, 0.227451, 1)
+albedo_color = Color(0.94902, 0.882353, 0.862745, 1)
 albedo_texture = ExtResource("1_7hd3h")
+emission_enabled = true
+emission = Color(0.309804, 0.309804, 0.309804, 1)
+emission_energy_multiplier = 10.48
+emission_operator = 1
 uv1_triplanar = true
 disable_receive_shadows = true
 grow_amount = -16.0
@@ -49,3 +54,6 @@ mesh = SubResource("BoxMesh_a4l8v")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(5.6, 0, 0, 0, 5.184, 0, 0, 0, 1, -0.625, 2.29167, 0)
 shape = SubResource("BoxShape3D_vij04")
+
+[node name="Open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_h7uqs")

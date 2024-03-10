@@ -1,6 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxak1fnnmyn47"]
+[gd_scene load_steps=21 format=3 uid="uid://dxak1fnnmyn47"]
 
 [ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_ob2in"]
+[ext_resource type="ArrayMesh" uid="uid://dulhc1ccewf7d" path="res://Enemy/Human/Leg.obj" id="2_2ncwu"]
+[ext_resource type="PackedScene" uid="uid://cutbfveynld5j" path="res://LazerGun/LaserGun.tscn" id="2_eidc2"]
+[ext_resource type="ArrayMesh" uid="uid://buk324fdl5r7j" path="res://Enemy/Human/Torse.obj" id="3_6btm3"]
+[ext_resource type="AudioStream" uid="uid://shqlu5ep2qjf" path="res://PistolShoot.wav" id="3_g2yh8"]
+[ext_resource type="ArrayMesh" uid="uid://d2fkogpgqfp55" path="res://Enemy/Human/Rig.obj" id="4_1xj0u"]
+[ext_resource type="Texture2D" uid="uid://54pj0p0l001u" path="res://Shootgun/UVmaps.png" id="5_ctd6u"]
+[ext_resource type="AudioStream" uid="uid://c1op4ktiy04gb" path="res://Sound/Drobovik.ogg" id="6_2msm0"]
+[ext_resource type="ArrayMesh" uid="uid://dcoawpl2t7jw1" path="res://Shootgun/Shotgun.obj" id="6_6vsms"]
+[ext_resource type="ArrayMesh" uid="uid://s1fqu5dugt3m" path="res://Pistol/Sword/sword.obj" id="10_ixiam"]
+[ext_resource type="AudioStream" uid="uid://i8yqx8eg6nw" path="res://Sound/sword.ogg" id="11_8w3ka"]
+[ext_resource type="AudioStream" uid="uid://frpgogg5x0ht" path="res://Sound/VoiceBro1.ogg" id="12_aod0a"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d21ya"]
 
@@ -8,12 +19,47 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i14rq"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx2fa"]
+albedo_texture = ExtResource("5_ctd6u")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwtua"]
+emission_enabled = true
+emission = Color(0, 0.713726, 0.65098, 1)
+emission_energy_multiplier = 9.65
+
+[sub_resource type="Animation" id="Animation_2a46d"]
+resource_name = "Stand"
+
+[sub_resource type="Animation" id="Animation_j5kcp"]
+resource_name = "Walk"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Legf")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 1, 0, 0.3, 1, 0, -0.259, 0.966, 0, 0.7, 1, 0, 0.259, 0.966, 0, 1, 1, 0, 0, 1, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Legf2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 1, 0, 0.3, 1, 0, 0.259, 0.966, 0, 0.7, 1, 0, -0.259, 0.966, 0, 1, 1, 0, 0, 1, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_daakl"]
+_data = {
+"Stand": SubResource("Animation_2a46d"),
+"Walk": SubResource("Animation_j5kcp")
+}
+
 [node name="enemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_ob2in")
 
 [node name="body" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.19378, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_d21ya")
 
 [node name="nose" type="MeshInstance3D" parent="body"]
@@ -44,4 +90,88 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999999, -0.8)
 light_color = Color(0.870588, 0.172549, 0.278431, 1)
 spot_angle = 15.0
 
+[node name="Shoot" type="Timer" parent="."]
+wait_time = 0.504
+autostart = true
+
+[node name="Legf" type="Node3D" parent="."]
+transform = Transform3D(1, -8.74228e-08, 0, 8.74228e-08, 1, 0, 0, 0, -1, 0.00105429, -0.294722, 0)
+
+[node name="Leg" type="MeshInstance3D" parent="Legf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.550885, -0.8038, 0)
+mesh = ExtResource("2_2ncwu")
+skeleton = NodePath("../..")
+
+[node name="Legf2" type="Node3D" parent="."]
+transform = Transform3D(1, -8.74228e-08, 0, 8.74228e-08, 1, 0, 0, 0, -1, -0.467256, -0.294722, 0)
+
+[node name="Leg" type="MeshInstance3D" parent="Legf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.550885, -0.8038, 0)
+mesh = ExtResource("2_2ncwu")
+skeleton = NodePath("../..")
+
+[node name="Torse" type="Node3D" parent="."]
+
+[node name="Torse" type="MeshInstance3D" parent="Torse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -1.141, 0)
+mesh = ExtResource("3_6btm3")
+skeleton = NodePath("../..")
+
+[node name="Rig" type="Node3D" parent="."]
+transform = Transform3D(0.941788, 0, 0.336208, -0.203607, 0.79577, 0.570346, -0.267544, -0.6056, 0.749446, -0.315978, 0.46829, 0.326964)
+
+[node name="Rig" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0.441028, -1.58917, 0)
+mesh = ExtResource("4_1xj0u")
+skeleton = NodePath("../..")
+
+[node name="Rig2" type="Node3D" parent="."]
+transform = Transform3D(-0.814481, -0.477885, -0.329006, -0.48162, 0.873089, -0.0758829, -0.323515, -0.0966508, 0.941274, 0.306534, 0.46829, 0.326964)
+
+[node name="Rig" type="MeshInstance3D" parent="Rig2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0.441028, -1.58917, 0)
+mesh = ExtResource("4_1xj0u")
+skeleton = NodePath("../..")
+
+[node name="Shootgun" type="Node3D" parent="Rig2"]
+transform = Transform3D(0.267544, 0.203607, 0.941788, -0.6056, 0.79577, 5.62739e-08, 0.749446, 0.570346, -0.336208, -0.188249, 0.826998, -1.7045)
+visible = false
+
+[node name="Shotgun" type="MeshInstance3D" parent="Rig2/Shootgun"]
+transform = Transform3D(0.0435152, -0.0488416, 0.0117625, 0.0365275, 0.0414436, 0.036954, -0.0344906, -0.01773, 0.0539766, 1.15374, -0.319983, -0.330434)
+material_override = SubResource("StandardMaterial3D_gx2fa")
+mesh = ExtResource("6_6vsms")
+skeleton = NodePath("../../..")
+
+[node name="Shoot2" type="AudioStreamPlayer" parent="Rig2/Shootgun"]
+stream = ExtResource("6_2msm0")
+
+[node name="LaserGun" parent="Rig2" instance=ExtResource("2_eidc2")]
+transform = Transform3D(-0.151152, -0.157165, 0.483027, -0.0147725, 0.505106, 0.159726, 0.507738, -0.0320915, 0.148443, 0.52723, -0.694985, -1.07034)
+visible = false
+
+[node name="Shoot" type="AudioStreamPlayer" parent="Rig2/LaserGun"]
+stream = ExtResource("3_g2yh8")
+
+[node name="Sword" type="Node3D" parent="Rig2"]
+transform = Transform3D(1, 7.45058e-09, 0, -1.86265e-08, 1, 0, 0, 0, 1, -0.402061, 0.0824464, -0.538658)
+
+[node name="Sword" type="MeshInstance3D" parent="Rig2/Sword"]
+transform = Transform3D(-0.490705, -0.290164, -0.19491, -0.287914, 0.526015, -0.0582298, -0.198218, -0.0457176, 0.567094, 0.743397, -0.0835326, -0.257963)
+material_override = SubResource("StandardMaterial3D_rwtua")
+mesh = ExtResource("10_ixiam")
+skeleton = NodePath("../../..")
+
+[node name="Shoot3" type="AudioStreamPlayer" parent="Rig2/Sword"]
+stream = ExtResource("11_8w3ka")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_daakl")
+}
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_aod0a")
+
 [connection signal="timeout" from="engaged" to="." method="_on_engaged_timeout"]
+[connection signal="timeout" from="Shoot" to="." method="_on_shoot_timeout"]
